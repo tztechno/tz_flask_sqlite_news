@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ニュース一覧</title>
+</head>
+
+<body>
+    <h1>ニュース一覧</h1>
+    <a href="{{ url_for('add_article') }}">新しい記事を追加</a>
+    <table>
+        <thead>
+            <tr>
+                <th>日付</th>
+                <th>件名</th>
+                <th>内容</th>
+                <th>削除</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for article in articles %}
+            <tr>
+                <td>{{ article.date }}</td>
+                <td>{{ article.subject }}</td>
+                <td>{{ article.content }}</td>
+                <td>
+                    <form action="{{ url_for('delete_article', id=article.id) }}" method="POST">
+                        <button type="submit">削除</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+
+</html>
